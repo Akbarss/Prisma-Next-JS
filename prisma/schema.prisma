@@ -46,11 +46,11 @@ model Aviability {
 
   title                   String
   coverImage              String
-  description             String?
   residence               String
   beds                    String
   baths                   String
   area                    String
   price                   String
   estMonthlyCommonCharges String
+  description             String?
 }
