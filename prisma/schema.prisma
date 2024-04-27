@@ -53,27 +53,29 @@ model Aviability {
   price                   String
   estMonthlyCommonCharges Int
   description             String?
+  floorPlanUrl String
 }
 
 
 // Protfolio Page
-model Protfolio {
+model Project {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  filter FilterPortfolio[]
+  category ProjectCategory @relation(fields: [categoryId], references: [id])
+  categoryId String
   title String
   coverImage String
 }
 
-model FilterPortfolio {
+model ProjectCategory {
   id         String   @id @default(uuid())
   createdAt  DateTime @default(now())
   upodatedAt DateTime @updatedAt
 
   title String
-  portfolio Protfolio[]
+  projects Project[]
 }
 
 // Career Page
@@ -92,25 +94,12 @@ model Career {
 model City {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
-  state  State  @relation(fields: [stateId], references: [id])
 
-  city Career[]
-  stateId String
-  localName String
+  careers Career[]
   name String
-  timezone DateTime?
-  zipCode Int?
 }
 
-model State {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  cites City[]
-  localName String
-  name String
-  timeZone DateTime?
-  zipCode Int?
-}
+
 
 // Press Page
 model Press {
@@ -120,6 +109,8 @@ model Press {
   coverImg String
   title String
   description String?
+  date DateTime
+  content String // JSON
 }
 
 
@@ -131,9 +122,8 @@ model Contacts {
 
   name String
   email String @unique
-  phone Int
-  select String?
-  checkbox String?
+  phone String?
+  typeOfConsultation  String?
 }
 
 // Team Page
@@ -143,7 +133,8 @@ model Team {
   updatedAt DateTime @default(now())
 
   coverImg String
-  teamName String
+  name String
+  surname String
   positionInTheCompany String
   description String?
 }
