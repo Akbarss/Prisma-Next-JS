@@ -39,105 +39,105 @@ model Post {
 }
 
 // Aviability Page
-model Aviability {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  upodatedAt DateTime @updatedAt
+// model Aviability {
+//   id         String   @id @default(uuid())
+//   createdAt  DateTime @default(now())
+//   upodatedAt DateTime @updatedAt
 
-  title                   String
-  coverImage              String
-  residence               Int
-  beds                    Int
-  baths                   Int
-  area                    Int
-  price                   String
-  estMonthlyCommonCharges Int
-  description             String?
-  floorPlanUrl String
-}
-
-
-// Protfolio Page
-model Project {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-
-  category ProjectCategory @relation(fields: [categoryId], references: [id])
-  categoryId String
-  title String
-  coverImage String
-}
-
-model ProjectCategory {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  upodatedAt DateTime @updatedAt
-
-  title String
-  projects Project[]
-}
-
-// Career Page
-model Career {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-
-  title String
-  description String?
-  time DateTime 
-  count Int
-  city City[]
-}
-
-model City {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-
-  careers Career[]
-  name String
-}
+//   title                   String
+//   coverImage              String
+//   residence               Int
+//   beds                    Int
+//   baths                   Int
+//   area                    Int
+//   price                   String
+//   estMonthlyCommonCharges Int
+//   description             String?
+//   floorPlanUrl String
+// }
 
 
+// // Protfolio Page
+// model Project {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
 
-// Press Page
-model Press {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  coverImg String
-  title String
-  description String?
-  date DateTime
-  content String // JSON
-}
+//   category ProjectCategory @relation(fields: [categoryId], references: [id])
+//   categoryId String
+//   title String
+//   coverImage String
+// }
+
+// model ProjectCategory {
+//   id         String   @id @default(uuid())
+//   createdAt  DateTime @default(now())
+//   upodatedAt DateTime @updatedAt
+
+//   title String
+//   projects Project[]
+// }
+
+// // Career Page
+// model Career {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+
+//   title String
+//   description String?
+//   time DateTime 
+//   count Int
+//   city City[]
+// }
+
+// model City {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+
+//   careers Career[]
+//   name String
+// }
 
 
-// Contacts Form
-model Contacts {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
 
-  name String
-  email String @unique
-  phone String?
-  typeOfConsultation  String?
-}
+// // Press Page
+// model Press {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   coverImg String
+//   title String
+//   description String?
+//   date DateTime
+//   content String // JSON
+// }
 
-// Team Page
-model Team {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
 
-  coverImg String
-  name String
-  surname String
-  positionInTheCompany String
-  description String?
-}
+// // Contacts Form
+// model Contacts {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+
+//   name String
+//   email String @unique
+//   phone String?
+//   typeOfConsultation  String?
+// }
+
+// // Team Page
+// model Team {
+//   id String @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+
+//   coverImg String
+//   name String
+//   surname String
+//   positionInTheCompany String
+//   description String?
+// }
 
 // enum ContactsSelect {
 //   Newest
