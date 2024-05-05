@@ -1,13 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import prisma from "../../../prisma/prismaClient";
+import prisma from "../../../../prisma/prismaClient";
 
 interface CreateUserDto {
   name: string;
   surname: string;
   email: string;
   password: string;
+}
+
+interface UpdateUserDto {
+  name?: string;
+  surname?: string;
+  email?: string;
+  password?: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -46,6 +53,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(201).json({ data: newUser });
     } catch (e) {
       res.status(500).json({ message: "500 error" });
+    }
+  } else if (req.method === "DELETE") {
+    try {
+      const { id } = req.query;
+      if (typeof id !== "string") {
+        throw new Error("User ID must be a string");
+      }
+
+      await prisma.user.delete({
+        where: { id: id },
+      });
+
+      return res.status(204).end();
+    } catch (e) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  } else if (req.method === "GET" && req.query.id) {
+    try {
+      const id = req.query.id as string;
+
+      const user = await prisma.user.findUnique({
+        where: { id: id },
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      return res.status(200).json({ data: user });
+    } catch (error) {
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 }
